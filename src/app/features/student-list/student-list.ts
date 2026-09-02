@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { Student } from '../../core/services/student.service';
 import { log } from 'console';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-student-list',
@@ -10,10 +11,14 @@ import { log } from 'console';
 })
 export class StudentList {
   private studentService = inject(Student);
+  private readonly platformId = inject(PLATFORM_ID);
   student: Student[] = [];
 
   ngOnInit() {
-    this.loadStudents();
+    // this.loadStudents();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadStudents();
+    }
   }
 
   loadStudents() {
