@@ -19,12 +19,24 @@ export class AuthService {
   private readonly apiUrl = `${environment.apiUrl}/Auth`;
   private readonly tokenKey = 'access_token';
 
+  // login(credentials: LoginDto): Observable<string> {
+  //   return this.http.post<string>(`${this.apiUrl}/login`, credentials).pipe(
+  //     tap((token) => {
+  //       this.setToken(token);
+  //     }),
+  //   );
+  // }
+
   login(credentials: LoginDto): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/login`, credentials).pipe(
-      tap((token) => {
-        this.setToken(token);
-      }),
-    );
+    return this.http
+      .post(`${this.apiUrl}/login`, credentials, {
+        responseType: 'text',
+      })
+      .pipe(
+        tap((token) => {
+          this.setToken(token.trim().replace(/^"|"$/g, ''));
+        }),
+      );
   }
 
   setToken(token: string): void {
@@ -39,6 +51,7 @@ export class AuthService {
     }
 
     return null;
+    
   }
 
   removeToken(): void {

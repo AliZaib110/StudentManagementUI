@@ -1,0 +1,82 @@
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-header">
+            <h1>Student Management</h1>
+            <p>Sign in to your account</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+
+            <!-- Error -->
+            @if (errorMessage) {
+            <div class="error-message">
+                {{ errorMessage }}
+            </div>
+            }
+
+            <!-- Email -->
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input id="email" type="email" formControlName="email" placeholder="Enter your email"
+                    autocomplete="email" />
+
+                @if (email.touched && email.hasError('required')) {
+                <small class="validation-error">
+                    Email is required.
+                </small>
+                }
+
+                @if (email.touched && email.hasError('email')) {
+                <small class="validation-error">
+                    Please enter a valid email address.
+                </small>
+                }
+
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input id="password" type="password" formControlName="password" placeholder="Enter your password"
+                    autocomplete="current-password" />
+
+                @if (password.touched && password.hasError('required')) {
+                <small class="validation-error">
+                    Password is required.
+                </small>
+                }
+
+                @if (password.touched && password.hasError('minlength')) {
+                <small class="validation-error">
+                    Password must be at least 5 characters.
+                </small>
+                }
+
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" [disabled]="isLoading">
+
+                @if (isLoading) {
+                <span>Signing in...</span>
+                } @else {
+                <span>Sign In</span>
+                }
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
