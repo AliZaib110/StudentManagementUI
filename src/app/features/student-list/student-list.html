@@ -1,1 +1,227 @@
-<p>student-list works!</p>
+<div class="student-page">
+
+    <!-- Header -->
+    <div class="page-header">
+
+        <div>
+            <h1>Students</h1>
+            <p>Manage students and their information</p>
+        </div>
+
+        <button class="btn-primary" type="button" (click)="createStudent()">
+            + New Student
+        </button>
+
+    </div>
+
+
+    <!-- Error -->
+    @if (errorMessage) {
+
+    <div class="alert-error">
+        {{ errorMessage }}
+    </div>
+
+    }
+
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+
+        <div class="search-box">
+
+            <span class="search-icon">⌕</span>
+
+            <input type="text" placeholder="Search students..." [(ngModel)]="searchTerm" />
+
+        </div>
+
+        <div class="student-count">
+
+            {{ filteredStudents.length }}
+
+            {{ filteredStudents.length === 1 ? 'Student' : 'Students' }}
+
+        </div>
+
+    </div>
+
+
+    <!-- Loading -->
+    @if (isLoading) {
+
+    <div class="loading">
+        <div class="spinner"></div>
+        <p>Loading students...</p>
+    </div>
+
+    }
+
+
+    <!-- Table -->
+    @if (!isLoading && filteredStudents.length > 0) {
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>Student</th>
+
+                    <th>Email</th>
+
+                    <th>Age</th>
+
+                    <th>Course</th>
+
+                    <th>Address</th>
+
+                    <th>Created</th>
+
+                    <th class="actions-column">
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                @for (
+                student of filteredStudents;
+                track student.id;
+                let i = $index
+                ) {
+
+                <tr>
+
+                    <td class="id-column">
+                        {{ i + 1 }}
+                    </td>
+
+
+                    <td>
+
+                        <div class="student-info">
+
+                            <div class="avatar">
+                                {{ student.name.charAt(0).toUpperCase() }}
+                            </div>
+
+                            <div>
+                                <strong>
+                                    {{ student.name }}
+                                </strong>
+                            </div>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        {{ student.email }}
+                    </td>
+
+
+                    <td>
+                        {{ student.age }}
+                    </td>
+
+
+                    <td>
+
+                        <span class="course-badge">
+                            {{ student.course }}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        {{ student.address }}
+                    </td>
+
+
+                    <td>
+                        {{ student.createdDate | date:'dd MMM yyyy' }}
+                    </td>
+
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button type="button" class="btn-edit" (click)="editStudent(student.id)">
+                                Edit
+                            </button>
+
+
+                            <button type="button" class="btn-delete" (click)="deleteStudent(student)">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    }
+
+
+    <!-- Empty -->
+    @if (!isLoading && filteredStudents.length === 0) {
+
+    <div class="empty-state">
+
+        <div class="empty-icon">
+            🎓
+        </div>
+
+        @if (searchTerm) {
+
+        <h2>No students found</h2>
+
+        <p>
+            No students match "{{ searchTerm }}".
+        </p>
+
+        <button type="button" class="btn-secondary" (click)="searchTerm = ''">
+            Clear Search
+        </button>
+
+        } @else {
+
+        <h2>No students yet</h2>
+
+        <p>
+            Start by creating your first student.
+        </p>
+
+        <button type="button" class="btn-primary" (click)="createStudent()">
+            + Create Student
+        </button>
+
+        }
+
+    </div>
+
+    }
+
+</div>
