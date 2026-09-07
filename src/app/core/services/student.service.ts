@@ -12,6 +12,7 @@ export class StudentService {
   private readonly apiUrl = `${environment.apiUrl}/Students`;
 
   getStudents(): Observable<StudentModule[]> {
+    debugger;
     return this.http.get<StudentModule[]>(this.apiUrl);
   }
   getStudent(id: number): Observable<StudentModule[]> {

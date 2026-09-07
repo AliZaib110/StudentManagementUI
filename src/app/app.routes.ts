@@ -8,7 +8,14 @@ export const routes: Routes = [
 
   {
     path: 'students',
-    loadComponent: () => import('./features/student-list/student-list').then((m) => m.StudentList),
+    loadComponent: () =>
+      // import('./features/students/student-list/student-list').then((m) => m.StudentList),
+      import('./features/students/student-list/student-list').then((m) => m.StudentList),
+  },
+  {
+    path: 'students/new',
+    loadComponent: () =>
+      import('./features/students/new-student/new-student').then((n) => n.NewStudent),
   },
 
   {

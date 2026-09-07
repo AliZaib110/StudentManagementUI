@@ -16,13 +16,13 @@
 
 
     <!-- Error -->
-    @if (errorMessage) {
+    <!-- @if (errorMessage) {
 
     <div class="alert-error">
         {{ errorMessage }}
-    </div>
+    </div> -->
 
-    }
+    <!-- } -->
 
 
     <!-- Toolbar -->
@@ -32,34 +32,35 @@
 
             <span class="search-icon">⌕</span>
 
-            <input type="text" placeholder="Search students..." [(ngModel)]="searchTerm" />
+            <input type="text" placeholder="Search students..." [ngModel]="searchTerm()"
+                (ngModelChange)="searchTerm.set($event)" />
 
         </div>
 
-        <div class="student-count">
+        <!-- <div class="student-count">
 
-            {{ filteredStudents.length }}
+            {{ students.length }}
 
-            {{ filteredStudents.length === 1 ? 'Student' : 'Students' }}
+            {{ students.length === 1 ? 'Student' : 'Students' }}
 
-        </div>
+        </div> -->
 
     </div>
 
 
     <!-- Loading -->
-    @if (isLoading) {
+    <!-- @if (isLoading) {
 
     <div class="loading">
         <div class="spinner"></div>
         <p>Loading students...</p>
     </div>
 
-    }
+    } -->
 
 
     <!-- Table -->
-    @if (!isLoading && filteredStudents.length > 0) {
+    <!-- @if (students.length > 0) { -->
 
     <div class="table-container">
 
@@ -95,7 +96,7 @@
             <tbody>
 
                 @for (
-                student of filteredStudents;
+                student of students();
                 track student.id;
                 let i = $index
                 ) {
@@ -182,11 +183,11 @@
 
     </div>
 
-    }
+    <!-- } -->
 
 
     <!-- Empty -->
-    @if (!isLoading && filteredStudents.length === 0) {
+    <!-- @if (!isLoading && students.length === 0) {
 
     <div class="empty-state">
 
@@ -222,6 +223,6 @@
 
     </div>
 
-    }
+    } -->
 
 </div>
