@@ -1,1 +1,89 @@
-<p>new-student works!</p>
+<div class="student-page">
+
+  <div class="page-header">
+    <div>
+      <h1>New Student</h1>
+      <p>Add a new student</p>
+    </div>
+  </div>
+
+  <div class="form-container">
+
+    @if (errorMessage) {
+      <div class="alert-error">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
+
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="name">
+
+        @if (studentForm.controls.name.touched &&
+             studentForm.controls.name.invalid) {
+          <small>Name is required.</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email">
+
+        @if (studentForm.controls.email.touched &&
+             studentForm.controls.email.invalid) {
+          <small>Valid email is required.</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Age</label>
+        <input type="number" formControlName="age">
+      </div>
+
+      <div class="form-group">
+        <label>Course</label>
+        <input type="text" formControlName="course">
+
+        @if (studentForm.controls.course.touched &&
+             studentForm.controls.course.invalid) {
+          <small>Course is required.</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" formControlName="address">
+
+        @if (studentForm.controls.address.touched &&
+             studentForm.controls.address.invalid) {
+          <small>Address is required.</small>
+        }
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn-secondary"
+          (click)="cancel()">
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="isLoading">
+
+          {{ isLoading ? 'Creating...' : 'Create Student' }}
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
