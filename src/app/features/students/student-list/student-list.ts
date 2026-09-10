@@ -93,7 +93,7 @@ export class StudentList {
   }
 
   createStudent(): void {
-    this.router.navigate(['/students/create']);
+    this.router.navigate(['/students/new']);
   }
 
   editStudent(id: number): void {

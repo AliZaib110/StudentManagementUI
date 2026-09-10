@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { StudentService } from './../../../core/services/student.service';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-student',
@@ -25,7 +25,7 @@ export class NewStudent {
   isLoading: boolean = false;
   errorMessage: string = '';
 
-  submitStudent() {
+  saveStudent() {
     if (this.studentForm.invalid) {
       this.studentForm.markAllAsTouched();
       this.studentForm.markAllAsDirty();
