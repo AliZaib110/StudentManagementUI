@@ -1,11 +1,19 @@
 <div class="container-fluid py-4">
 
-  <!-- Page Header -->
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
+    <h2 class="fw-bold mb-1">
+      {{ studentId ? 'Edit Student' : 'New Student' }}
+    </h2>
+
+    <p class="text-muted mb-0">
+      {{ studentId ? 'Update student information' : 'Add a new student' }}
+    </p>
+
+    <!-- Page Header -->
+    <!-- <div>
       <h2 class="fw-bold mb-1">New Student</h2>
       <p class="text-muted mb-0">Add a new student to the system</p>
-    </div>
+    </div> -->
 
     <button type="button" class="btn btn-outline-secondary" (click)="cancel()">
       ← Back
@@ -145,7 +153,7 @@
             Cancel
           </button>
 
-          <button type="submit" class="btn btn-primary px-4" [disabled]="isLoading">
+          <!-- <button type="submit" class="btn btn-primary px-4" [disabled]="isLoading">
 
             @if (isLoading) {
             <span class="spinner-border spinner-border-sm me-2" aria-hidden="true">
@@ -154,6 +162,16 @@
             Creating...
             } @else {
             Create Student
+            }
+
+          </button> -->
+          <button type="submit" class="btn btn-primary px-4" [disabled]="isSaving">
+
+            @if (isSaving) {
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            {{ studentId ? 'Updating...' : 'Creating...' }}
+            } @else {
+            {{ studentId ? 'Update Student' : 'Create Student' }}
             }
 
           </button>

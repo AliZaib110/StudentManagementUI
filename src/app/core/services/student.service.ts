@@ -14,8 +14,8 @@ export class StudentService {
   getStudents(): Observable<StudentModule[]> {
     return this.http.get<StudentModule[]>(this.apiUrl);
   }
-  getStudent(id: number): Observable<StudentModule[]> {
-    return this.http.get<StudentModule[]>(`${this.apiUrl}/${id}`);
+  getStudent(id: number): Observable<StudentModule> {
+    return this.http.get<StudentModule>(`${this.apiUrl}/${id}`);
   }
   createStudent(student: any): Observable<StudentModule[]> {
     return this.http.post<StudentModule[]>(this.apiUrl, student);
