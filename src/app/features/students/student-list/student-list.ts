@@ -77,8 +77,6 @@ export class StudentList {
 
     this.studentService.getStudents().subscribe({
       next: (students) => {
-        console.log('stud ====>', students);
-
         this.students.set(students);
         this.isLoading.set(false);
       },

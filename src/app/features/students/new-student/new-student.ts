@@ -26,6 +26,7 @@ export class NewStudent {
     course: ['', [Validators.required]],
     address: ['', [Validators.required]],
   });
+  createdDate: string = '';
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -43,10 +44,11 @@ export class NewStudent {
   loadStudent() {
     if (!this.studentId) return;
 
+    this.isLoading = true;
+
     this.studentService.getStudent(this.studentId).subscribe({
       next: (student: StudentModule) => {
-        var data = student;
-        console.log(data);
+        this.createdDate = student.createdDate;
 
         this.studentForm.patchValue({
           name: student.name,
@@ -67,6 +69,7 @@ export class NewStudent {
   }
 
   saveStudent() {
+    debugger;
     if (this.studentForm.invalid) {
       this.studentForm.markAllAsTouched();
       this.studentForm.markAllAsDirty();
@@ -89,15 +92,18 @@ export class NewStudent {
         age: formData.age,
         course: formData.course,
         address: formData.address,
-        createdDate: '',
+        createdDate: this.createdDate,
       };
 
-      this.studentService.updateStudent(student).subscribe({
+      this.studentService.updateStudent(this.studentId, student).subscribe({
         next: () => {
-          this.router.navigate(['/students']);
+          // this.router.navigate([`/students/edit${this.studentId}`]);
+          this.isSaving = false;
+          this.loadStudent(); // reload updated record from API
         },
         error: (error) => {
           console.error('Update error:', error);
+          this.isSaving = false;
 
           this.errorMessage =
             error.status === 403
