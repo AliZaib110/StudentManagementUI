@@ -1,19 +1,30 @@
 <div class="student-page">
-
     <!-- Header -->
-    <div class="page-header">
+    <div class="page-header row align-items-center">
 
-        <div>
+        <!-- Left side -->
+        <div class="col-md-6">
             <h1>Students</h1>
             <p>Manage students and their information</p>
         </div>
 
-        <button class="btn-primary" type="button" (click)="createStudent()">
-            + New Student
-        </button>
+        <!-- Right side -->
+        <div class="col-md-6 d-flex align-items-center justify-content-end gap-3">
+
+            <div class="search-box">
+                <span class="search-icon">⌕</span>
+
+                <input type="text" placeholder="Search students..." [ngModel]="searchTerm()"
+                    (ngModelChange)="searchTerm.set($event)" />
+            </div>
+
+            <button class="btn-primary" type="button" (click)="createStudent()">
+                + New Student
+            </button>
+
+        </div>
 
     </div>
-
 
     <!-- Error -->
     <!-- @if (errorMessage) {
@@ -25,27 +36,7 @@
     <!-- } -->
 
 
-    <!-- Toolbar -->
-    <div class="toolbar">
 
-        <div class="search-box">
-
-            <span class="search-icon">⌕</span>
-
-            <input type="text" placeholder="Search students..." [ngModel]="searchTerm()"
-                (ngModelChange)="searchTerm.set($event)" />
-
-        </div>
-
-        <!-- <div class="student-count">
-
-            {{ students.length }}
-
-            {{ students.length === 1 ? 'Student' : 'Students' }}
-
-        </div> -->
-
-    </div>
 
 
     <!-- Loading -->

@@ -108,17 +108,16 @@ export class StudentList {
     this.studentService.deleteStudent(student.id).subscribe({
       next: () => {
         // Remove from current list
-        this.students;
-        // this.students.filter((s) => s.id !== student.id);
+        this.students.update((students) => students.filter((s) => s.id !== student.id));
       },
 
       error: (error) => {
         console.error('Failed to delete student:', error);
 
         if (error.status === 403) {
-          // this.errorMessage = 'You do not have permission to delete students.';
+          this.errorMessage.set('You do not have permission to delete students.');
         } else {
-          // this.errorMessage = 'Failed to delete student. Please try again.';
+          this.errorMessage.set('Failed to delete student. Please try again.');
         }
       },
     });
